@@ -21,18 +21,18 @@ module.exports = function(grunt) {
                 text: this.data.text.replace('{{message}}', message)
             };
 
-        if(options.channel){
-            data.channel = options.channel;
+        if(options.channel || this.data.channel){
+            data.channel = this.data.channel || options.channel;
         }
 
-        if (options.username) {
-            data.username = options.username;
+        if (options.username || this.data.username) {
+            data.username = this.data.username || options.username;
         }
 
-        if (options.icon_emoji) {
-            data.icon_emoji = options.icon_emoji;
-        } else if (options.icon_url) {
-            data.icon_url = options.icon_url;
+        if (options.icon_emoji || this.data.icon_emoji) {
+            data.icon_emoji = this.data.icon_emoji || options.icon_emoji;
+        } else if (options.icon_url || this.data.icon_url) {
+            data.icon_url = this.data.icon_url || options.icon_url;
         }
 
         request.post(options.endpoint).type('form').send('payload=' + JSON.stringify(data)).end(function(res) {
